@@ -45,6 +45,24 @@ on:
           the same version, overwriting its assets.
         type: boolean
         default: false
+      variants:
+        description: |
+          Comma-separated LGX variants to build for this module.
+          Defaults to the three natively-buildable ones.
+
+          Add `windows-x86_64` only for a module whose own flake exposes
+          `packages.x86_64-windows.*`. That is a CROSS build produced on a
+          Linux runner (there is no Nix for Windows), and it only exists
+          when the module pins a logos-module-builder that declares the
+          x86_64-windows target — modules on a release-tagged builder have
+          no such attribute and their Windows job would just fail, turning
+          a clean release into a partial one.
+
+          `windows-x86_64` is the exact spelling lgpm computes for that
+          platform, and unlike linux it has NO alias: a package labelled
+          `windows-amd64` would show up in the catalog and never install.
+        type: string
+        default: "darwin-arm64,linux-amd64,linux-arm64"
 
 # Forked repos default to a read-only GITHUB_TOKEN; the downstream
 # release job needs to create releases / upload assets.
@@ -53,9 +71,17 @@ permissions:
 
 jobs:
   release:
-    uses: logos-co/logos-modules-release-action/.github/workflows/release.yml@v1
+    # OPERATOR DECISION, flagged deliberately: this points at a FORK of the
+    # action because the Windows support (per-variant nix attribute,
+    # expression-based `runs-on`, the cross-artifact gate) is not merged
+    # upstream. `logos-co/...@v1` does not understand `variants:
+    # windows-x86_64` and would build a LINUX package labelled as Windows.
+    # Repoint at `logos-co/logos-modules-release-action/...@v1.2` once the
+    # change lands there; nothing else in this file needs to move.
+    uses: dlipicar/logos-modules-release-action/.github/workflows/release.yml@feat/windows-cross
     with:
       module_path: ${{ inputs.module_path }}
+      variants: ${{ inputs.variants }}
 
       # Normal runs skip a version that's already fully published; "Force
       # build" (force_build: true) republishes it by disabling that skip.
