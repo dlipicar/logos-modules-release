@@ -34,3 +34,9 @@
 [submodule "submodules/logos-accounts-module"]
 	path = submodules/logos-accounts-module
 	url = https://github.com/logos-co/logos-accounts-module
+[submodule "submodules/logos-hello-module"]
+	path = submodules/logos-hello-module
+	url = https://github.com/dlipicar/logos-hello-module
+[submodule "submodules/logos-hello-ui"]
+	path = submodules/logos-hello-ui
+	url = https://github.com/dlipicar/logos-hello-ui
