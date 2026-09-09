@@ -1,10 +1,11 @@
 name: _release-module
 
 # Local reusable workflow — the single place that owns this catalog's
-# signing configuration and its variant list. Every per-module workflow
-# (release-<repo>.yml) and the umbrella (release-all.yml) delegate here,
-# so switching signing modes or platforms only means editing THIS file,
-# never the callers.
+# signing configuration and the default variant list. Every per-module
+# workflow (release-<repo>.yml) and the umbrella (release-all.yml)
+# delegate here, so switching signing modes only means editing THIS
+# file, never the callers. Platforms are the one thing a caller may
+# override, via `variants:` — Windows is opt-in per module (see below).
 #
 # The leading underscore marks it "private": it has only `workflow_call`
 # (no `workflow_dispatch`), so it never shows up as a runnable item in
