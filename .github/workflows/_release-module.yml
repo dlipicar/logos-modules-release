@@ -72,27 +72,20 @@ permissions:
 
 jobs:
   release:
-    # Back on the upstream action: v1.4 understands `variants:
-    # windows-x86_64` and resolves the cross build through the
-    # `packages.x86_64-windows.lgx-portable` attribute, so the reason this
-    # catalog ran off a fork — a Linux package published under the Windows
-    # label — is gone.
+    # Upstream action, no fork. v1.4 brought the two things this catalog
+    # forked for — `variants: windows-x86_64` and the cross build resolved
+    # through `packages.x86_64-windows.lgx-portable` rather than a bare
+    # `.#lgx-portable` that would publish a Linux package under the Windows
+    # label — and v1.5 (logos-co/logos-modules-release-action#24) fixed the
+    # matrix `include:` list that was appending an uninvited windows-x86_64
+    # job to every caller. Below v1.5, expect one red leg and a partial
+    # release per run on all 14 modules here.
     #
-    # Pinned to the exact version, not the moving `v1`. `v1` happens to
-    # point at the same commit today, but Windows support landed only in
-    # v1.4: v1.1 through v1.3 have no windows-x86_64 leg at all, so a
-    # major-tag rollback would silently drop the platform rather than fail.
-    #
-    # KNOWN GAP, upstream: v1.4 maps variant -> runner with a matrix
-    # `include:` list that carries a `- variant: windows-x86_64` entry.
-    # Per GitHub's documented rule, an include object that cannot merge
-    # into any existing combination without overwriting an original matrix
-    # value CREATES A NEW COMBINATION — so every caller that does not ask
-    # for Windows still gets a windows-x86_64 job, which fails on the 14
-    # modules here that expose no such attribute. Until that is fixed
-    # upstream (replace `include:` with an expression-valued `runs-on`),
-    # expect one red leg and a partial release per run.
-    uses: logos-co/logos-modules-release-action/.github/workflows/release.yml@v1.4
+    # Pinned to the exact version, not the moving `v1`. They point at the
+    # same commit today, but Windows exists only from v1.4 — v1.1 through
+    # v1.3 have no windows-x86_64 leg at all — so tracking the major tag
+    # would let a rollback drop the platform silently rather than fail.
+    uses: logos-co/logos-modules-release-action/.github/workflows/release.yml@v1.5
     with:
       module_path: ${{ inputs.module_path }}
       variants: ${{ inputs.variants }}
