@@ -28,9 +28,6 @@
 [submodule "submodules/logos-evm-token-list-module"]
 	path = submodules/logos-evm-token-list-module
 	url = https://github.com/logos-co/logos-evm-token-list-module
-[submodule "submodules/logos-evm-uniswap-module"]
-	path = submodules/logos-evm-uniswap-module
-	url = https://github.com/logos-co/logos-evm-uniswap-module
 [submodule "submodules/logos-verified-proxy-module"]
 	path = submodules/logos-verified-proxy-module
 	url = https://github.com/logos-co/logos-verified-proxy-module

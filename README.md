@@ -20,7 +20,6 @@ tag.
 | `logos-evm-token-list-module` | `token_list_module` | — | Uniswap token lists + custom entries, downloaded/parsed/merged (proxyable, fail-closed). |
 | `logos-verified-proxy-module` | `verified_proxy_module` | — | Light-client-verified JSON-RPC, wrapping status-im's nimbus libverifproxy. |
 | `logos-evm-fee-module` | `fee_module` | `eth_rpc_module` | EIP-1559 slow/normal/fast tiers from `eth_feeHistory`, with custom overrides. |
-| `logos-evm-uniswap-module` | `uniswap_module` | `eth_rpc_module` | V2/V3/V4 best-rate prices (Multicall3-batched) and V2/V3 swap building. |
 | `logos-eth-wallet-backend` | `eth_wallet_backend` | `eth_rpc_module`, `fee_module`, `keystore_module`, `token_list_module` | The coordinator: balances, Send orchestration, local transaction history. One active network at a time. |
 
 ### UI
