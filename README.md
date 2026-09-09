@@ -55,7 +55,14 @@ git submodule update --init --recursive   # after cloning; trees are not committ
 ./scripts/add-module.sh <git-url>         # add a module + its release workflow
 ```
 
-Windows (`windows-x86_64`) is **opt-in per module**: uncomment the
-`variants:` line in that module's generated workflow, and only for a
-module whose flake actually exposes `packages.x86_64-windows`. See
-`.github/workflows/_release-module.yml`.
+Every module here builds for `windows-x86_64` as well as the three
+native variants — it is in the `variants:` default in
+`.github/workflows/_release-module.yml`, which is the one place to change
+the platform set for the whole catalog. Windows is a mingw **cross**
+build produced on a Linux runner; there is no Nix for Windows.
+
+The verified-proxy pair narrows itself back to the three native variants
+in its own `release-<module>.yml`. It exposes the Windows attribute like
+everything else, but the build fails: `nimbus-eth2` needs Nim 2.2.10 and
+`logos-nix`'s `nixpkgs-windows` pin carries 2.2.4. Drop those two
+overrides once that is bumped.

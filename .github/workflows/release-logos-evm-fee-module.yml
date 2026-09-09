@@ -32,12 +32,13 @@ jobs:
     with:
       module_path: submodules/logos-evm-fee-module
       force_build: ${{ inputs.force_build }}
-      # Windows is OPT-IN per module and deliberately not enabled here.
-      # `packages.x86_64-windows.*` only exists when the module's own
-      # flake pins a logos-module-builder that declares the x86_64-windows
-      # target; for any other module the Windows job fails and the release
-      # ships partial. To enable it for a module that does expose it,
-      # uncomment the line below in that module's generated workflow:
+      # Platforms come from the `variants:` default in
+      # _release-module.yml, which includes windows-x86_64 — every module
+      # in this catalog exposes `packages.x86_64-windows.*`.
       #
-      # variants: "darwin-arm64,linux-amd64,linux-arm64,windows-x86_64"
+      # Override here ONLY to narrow the list for a module that cannot
+      # actually cross-compile, so it ships a clean release instead of a
+      # permanently partial one:
+      #
+      # variants: "darwin-arm64,linux-amd64,linux-arm64"
     secrets: inherit
