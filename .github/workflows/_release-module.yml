@@ -72,14 +72,27 @@ permissions:
 
 jobs:
   release:
-    # OPERATOR DECISION, flagged deliberately: this points at a FORK of the
-    # action because the Windows support (per-variant nix attribute,
-    # expression-based `runs-on`, the cross-artifact gate) is not merged
-    # upstream. `logos-co/...@v1` does not understand `variants:
-    # windows-x86_64` and would build a LINUX package labelled as Windows.
-    # Repoint at `logos-co/logos-modules-release-action/...@v1.2` once the
-    # change lands there; nothing else in this file needs to move.
-    uses: dlipicar/logos-modules-release-action/.github/workflows/release.yml@feat/windows-cross
+    # Back on the upstream action: v1.4 understands `variants:
+    # windows-x86_64` and resolves the cross build through the
+    # `packages.x86_64-windows.lgx-portable` attribute, so the reason this
+    # catalog ran off a fork — a Linux package published under the Windows
+    # label — is gone.
+    #
+    # Pinned to the exact version, not the moving `v1`. `v1` happens to
+    # point at the same commit today, but Windows support landed only in
+    # v1.4: v1.1 through v1.3 have no windows-x86_64 leg at all, so a
+    # major-tag rollback would silently drop the platform rather than fail.
+    #
+    # KNOWN GAP, upstream: v1.4 maps variant -> runner with a matrix
+    # `include:` list that carries a `- variant: windows-x86_64` entry.
+    # Per GitHub's documented rule, an include object that cannot merge
+    # into any existing combination without overwriting an original matrix
+    # value CREATES A NEW COMBINATION — so every caller that does not ask
+    # for Windows still gets a windows-x86_64 job, which fails on the 14
+    # modules here that expose no such attribute. Until that is fixed
+    # upstream (replace `include:` with an expression-valued `runs-on`),
+    # expect one red leg and a partial release per run.
+    uses: logos-co/logos-modules-release-action/.github/workflows/release.yml@v1.4
     with:
       module_path: ${{ inputs.module_path }}
       variants: ${{ inputs.variants }}
