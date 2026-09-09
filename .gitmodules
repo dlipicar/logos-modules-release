@@ -16,33 +16,48 @@
 ; After cloning a fork, materialise the submodule working trees with:
 ;
 ;   git submodule update --init --recursive
-[submodule "submodules/logos-wallet-module"]
-	path = submodules/logos-wallet-module
-	url = https://github.com/logos-co/logos-wallet-module
-[submodule "submodules/logos-wallet-ui"]
-	path = submodules/logos-wallet-ui
-	url = https://github.com/logos-co/logos-wallet-ui
-[submodule "submodules/soulseek-ui"]
-	path = submodules/soulseek-ui
-	url = https://github.com/xAlisher/soulseek-ui
-[submodule "submodules/soulseek-basecamp"]
-	path = submodules/soulseek-basecamp
-	url = https://github.com/xAlisher/soulseek-basecamp
-[submodule "submodules/logos-accounts-ui"]
-	path = submodules/logos-accounts-ui
-	url = https://github.com/logos-co/logos-accounts-ui
-[submodule "submodules/logos-accounts-module"]
-	path = submodules/logos-accounts-module
-	url = https://github.com/logos-co/logos-accounts-module
-[submodule "submodules/logos-hello-module"]
-	path = submodules/logos-hello-module
-	url = https://github.com/dlipicar/logos-hello-module
-[submodule "submodules/logos-hello-ui"]
-	path = submodules/logos-hello-ui
-	url = https://github.com/dlipicar/logos-hello-ui
+[submodule "submodules/logos-evm-keystore-module"]
+	path = submodules/logos-evm-keystore-module
+	url = https://github.com/logos-co/logos-evm-keystore-module
+[submodule "submodules/logos-evm-eth-rpc-module"]
+	path = submodules/logos-evm-eth-rpc-module
+	url = https://github.com/logos-co/logos-evm-eth-rpc-module
+[submodule "submodules/logos-evm-fee-module"]
+	path = submodules/logos-evm-fee-module
+	url = https://github.com/logos-co/logos-evm-fee-module
+[submodule "submodules/logos-evm-token-list-module"]
+	path = submodules/logos-evm-token-list-module
+	url = https://github.com/logos-co/logos-evm-token-list-module
+[submodule "submodules/logos-evm-uniswap-module"]
+	path = submodules/logos-evm-uniswap-module
+	url = https://github.com/logos-co/logos-evm-uniswap-module
 [submodule "submodules/logos-verified-proxy-module"]
 	path = submodules/logos-verified-proxy-module
 	url = https://github.com/logos-co/logos-verified-proxy-module
+[submodule "submodules/logos-eth-wallet-backend"]
+	path = submodules/logos-eth-wallet-backend
+	url = https://github.com/logos-co/logos-eth-wallet-backend
+[submodule "submodules/logos-evm-keystore-ui"]
+	path = submodules/logos-evm-keystore-ui
+	url = https://github.com/logos-co/logos-evm-keystore-ui
+[submodule "submodules/logos-evm-signer-ui"]
+	path = submodules/logos-evm-signer-ui
+	url = https://github.com/logos-co/logos-evm-signer-ui
+[submodule "submodules/logos-eth-rpc-ui"]
+	path = submodules/logos-eth-rpc-ui
+	url = https://github.com/logos-co/logos-eth-rpc-ui
+[submodule "submodules/logos-token-list-ui"]
+	path = submodules/logos-token-list-ui
+	url = https://github.com/logos-co/logos-token-list-ui
 [submodule "submodules/logos-verified-proxy-ui"]
 	path = submodules/logos-verified-proxy-ui
 	url = https://github.com/logos-co/logos-verified-proxy-ui
+[submodule "submodules/logos-eth-wallet-ui"]
+	path = submodules/logos-eth-wallet-ui
+	url = https://github.com/logos-co/logos-eth-wallet-ui
+[submodule "submodules/logos-evm-keystore-cli"]
+	path = submodules/logos-evm-keystore-cli
+	url = https://github.com/logos-co/logos-evm-keystore-cli
+[submodule "submodules/logos-evm-signer-cli"]
+	path = submodules/logos-evm-signer-cli
+	url = https://github.com/logos-co/logos-evm-signer-cli
