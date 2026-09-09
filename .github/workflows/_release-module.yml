@@ -49,21 +49,29 @@ on:
       variants:
         description: |
           Comma-separated LGX variants to build for this module.
-          Defaults to the three natively-buildable ones.
+          Defaults to all four, Windows included.
 
-          Add `windows-x86_64` only for a module whose own flake exposes
-          `packages.x86_64-windows.*`. That is a CROSS build produced on a
-          Linux runner (there is no Nix for Windows), and it only exists
-          when the module pins a logos-module-builder that declares the
-          x86_64-windows target — modules on a release-tagged builder have
-          no such attribute and their Windows job would just fail, turning
-          a clean release into a partial one.
+          Every module in this catalog exposes
+          `packages.x86_64-windows.*`: the core and CLI flakes list the
+          target explicitly, and the ui_qml ones inherit it from
+          mkLogosQmlModule, whose `common.systems` appends the pseudo-
+          system whenever logos-nix is present. That is a CROSS build
+          produced on a Linux runner — there is no Nix for Windows.
+
+          Exposing the attribute is not the same as building it. A module
+          that cannot cross-compile should narrow this list back to the
+          three native variants in its own release-<module>.yml rather
+          than shipping a permanently partial release; the two
+          verified-proxy workflows do exactly that, and say why.
+
+          A module added later on a release-tagged logos-module-builder
+          may have no Windows attribute at all — narrow it the same way.
 
           `windows-x86_64` is the exact spelling lgpm computes for that
           platform, and unlike linux it has NO alias: a package labelled
           `windows-amd64` would show up in the catalog and never install.
         type: string
-        default: "darwin-arm64,linux-amd64,linux-arm64"
+        default: "darwin-arm64,linux-amd64,linux-arm64,windows-x86_64"
 
 # Forked repos default to a read-only GITHUB_TOKEN; the downstream
 # release job needs to create releases / upload assets.
