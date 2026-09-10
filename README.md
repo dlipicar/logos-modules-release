@@ -88,11 +88,9 @@ native variants — it is in the `variants:` default in
 the platform set for the whole catalog. Windows is a mingw **cross**
 build produced on a Linux runner; there is no Nix for Windows.
 
-One exception: `logos-verified-proxy-ui` narrows itself back to the three
-native variants in its own `release-<module>.yml`. Not because Windows is
-broken — `verified_proxy_module` cross-builds as of `8576a58` — but
-because this UI's `flake.lock` still pins the module before that fix, and
-a flake input resolves from the consumer's lock rather than the
-dependency's own. Once
+No module overrides that any more. `logos-verified-proxy-ui` used to
+narrow itself back to the three native variants — its `flake.lock` still
+pinned `verified_proxy_module` from before the Windows fix, and a flake
+input resolves from the consumer's lock rather than the dependency's own.
 [logos-co/logos-verified-proxy-ui#5](https://github.com/logos-co/logos-verified-proxy-ui/pull/5)
-merges and a Windows build is confirmed green, drop the override.
+relocked it, so the override is gone and every module takes the default.
