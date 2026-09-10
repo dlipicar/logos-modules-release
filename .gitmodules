@@ -58,3 +58,18 @@
 [submodule "submodules/logos-evm-signer-cli"]
 	path = submodules/logos-evm-signer-cli
 	url = https://github.com/logos-co/logos-evm-signer-cli
+[submodule "submodules/logos-monero-node-module"]
+	path = submodules/logos-monero-node-module
+	url = https://github.com/logos-co/logos-monero-node-module
+[submodule "submodules/logos-monero-wallet-core-module"]
+	path = submodules/logos-monero-wallet-core-module
+	url = https://github.com/logos-co/logos-monero-wallet-core-module
+[submodule "submodules/logos-monero-wallet-backend"]
+	path = submodules/logos-monero-wallet-backend
+	url = https://github.com/logos-co/logos-monero-wallet-backend
+[submodule "submodules/logos-monero-wallet-cli"]
+	path = submodules/logos-monero-wallet-cli
+	url = https://github.com/logos-co/logos-monero-wallet-cli
+[submodule "submodules/logos-monero-wallet-ui"]
+	path = submodules/logos-monero-wallet-ui
+	url = https://github.com/logos-co/logos-monero-wallet-ui
