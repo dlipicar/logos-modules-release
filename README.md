@@ -1,15 +1,15 @@
 # logos-modules-release
 
-Dario's personal collection of Logos packages — currently the **EVM /
-Ethereum wallet stack**: everything needed to run the Logos wallet, from
-key custody through to the Send screen.
+Dario's personal collection of Logos packages — two complete wallet
+stacks, **EVM / Ethereum** and **Monero**, each covering everything from
+key custody through to the send screen.
 
 Each entry is a git submodule under `submodules/`, published as an `.lgx`
 package by the matching `Release <module>` workflow. `logos-repo.json` is
 the catalog manifest clients read; the index lives on the `index` release
 tag.
 
-## Modules
+## EVM / Ethereum
 
 ### Core
 
@@ -45,6 +45,33 @@ fully functional.
 | `logos-evm-keystore-cli` | `evm_keystore_cli` | Headless custodian for `keystore_module` — the `logosctl` equivalent of the keystore UI. |
 | `logos-evm-signer-cli` | `evm_signer_cli` | Headless approver for `keystore_module` — the `logosctl` equivalent of the signer UI. |
 
+## Monero
+
+### Core
+
+| Module | Package | Depends on | What it does |
+| --- | --- | --- | --- |
+| `logos-monero-node-module` | `monero_node_module` | — | Proxyable, fail-closed monerod JSON-RPC client (per-network config). |
+| `logos-monero-wallet-core-module` | `monero_wallet_core_module` | `monero_node_module` | The wallet engine: wraps monero_c (wallet2) over its C ABI. The only module that holds a key or a password. |
+| `logos-monero-wallet-backend` | `monero_wallet_backend` | `monero_wallet_core_module`, `monero_node_module` | Coordinator: registry, sync, balances, history and the build-review-broadcast send flow. Holds no key material. |
+
+### UI
+
+| Module | Package | Provides intents | What it does |
+| --- | --- | --- | --- |
+| `logos-monero-wallet-ui` | `monero_wallet_ui` | `monero.wallet.unlock`, `monero.accounts.manage` | The wallet app: balances, a reviewed send, receive with QR, activity, wallet management. |
+
+### CLI
+
+| Module | Package | What it does |
+| --- | --- | --- |
+| `logos-monero-wallet-cli` | `monero_wallet_cli` | Headless Monero wallet for `logosctl`: open, read, transfer, review, broadcast. Holds the custodian and approver roles. |
+
+Unlike the EVM set, the Monero stack is closed on its own: no module
+declares `uses`, so nothing here depends on an intent another module has
+to provide. `monero_wallet_ui` *provides* two, for consumers outside this
+catalog.
+
 ## Working with the catalog
 
 ```bash
@@ -61,8 +88,11 @@ native variants — it is in the `variants:` default in
 the platform set for the whole catalog. Windows is a mingw **cross**
 build produced on a Linux runner; there is no Nix for Windows.
 
-The verified-proxy pair narrows itself back to the three native variants
-in its own `release-<module>.yml`. It exposes the Windows attribute like
-everything else, but the build fails: `nimbus-eth2` needs Nim 2.2.10 and
-`logos-nix`'s `nixpkgs-windows` pin carries 2.2.4. Drop those two
-overrides once that is bumped.
+One exception: `logos-verified-proxy-ui` narrows itself back to the three
+native variants in its own `release-<module>.yml`. Not because Windows is
+broken — `verified_proxy_module` cross-builds as of `8576a58` — but
+because this UI's `flake.lock` still pins the module before that fix, and
+a flake input resolves from the consumer's lock rather than the
+dependency's own. Once
+[logos-co/logos-verified-proxy-ui#5](https://github.com/logos-co/logos-verified-proxy-ui/pull/5)
+merges and a Windows build is confirmed green, drop the override.
