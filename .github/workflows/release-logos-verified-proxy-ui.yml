@@ -32,17 +32,4 @@ jobs:
     with:
       module_path: submodules/logos-verified-proxy-ui
       force_build: ${{ inputs.force_build }}
-      # NARROWED below the catalog default, which includes
-      # windows-x86_64. Not because Windows is broken any more —
-      # verified_proxy_module builds for it as of e8d911b — but because
-      # this UI has not picked that up: its flake.lock pins
-      # verified_proxy_module at 53a6194, and the fix is partly IN the
-      # module's flake.nix (`-d:enable_mcl_lib=false` on the mingw
-      # branch, so nim-mcl's llvm-mingw-only path is skipped). A flake
-      # input is resolved from this repo's lock, not from the module's
-      # own, so the old source is what gets built.
-      #
-      # Relock this UI onto the module at e8d911b or later, confirm the
-      # cross build, then delete this override.
-      variants: "darwin-arm64,linux-amd64,linux-arm64"
     secrets: inherit
