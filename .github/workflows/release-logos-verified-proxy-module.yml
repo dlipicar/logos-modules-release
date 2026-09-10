@@ -32,20 +32,4 @@ jobs:
     with:
       module_path: submodules/logos-verified-proxy-module
       force_build: ${{ inputs.force_build }}
-      # NARROWED below the catalog default, which now includes
-      # windows-x86_64. This module exposes `packages.x86_64-windows`
-      # like every other, but the attribute does not build — for a KNOWN,
-      # specific reason, not merely because nobody tried. The cross build gets through the mingw
-      # stdenv, the `ar` shim that Nim's --app:staticlib needs, and the
-      # vendored nat-libs, then fails compiling nimbus-eth2:
-      #
-      #   state_transition_block.nim(1018,32) Error: invalid type:
-      #   'typeof(SomeBeaconBlockBody)' in this context
-      #
-      # USE_SYSTEM_NIM=1 substitutes the nixpkgs Nim, and logos-nix's
-      # nixpkgs-windows carries 2.2.4 while nimbus-eth2 needs 2.2.10. The fix
-      # belongs in logos-nix. See the module's README for the three
-      # plausible-looking non-fixes. Drop this override once logos-nix
-      # carries Nim 2.2.10 and the cross build goes green.
-      variants: "darwin-arm64,linux-amd64,linux-arm64"
     secrets: inherit
