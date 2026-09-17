@@ -31,6 +31,15 @@
 [submodule "submodules/logos-verified-proxy-module"]
 	path = submodules/logos-verified-proxy-module
 	url = https://github.com/logos-co/logos-verified-proxy-module
+[submodule "submodules/logos-evm-tx-sender-module"]
+	path = submodules/logos-evm-tx-sender-module
+	url = https://github.com/logos-co/logos-evm-tx-sender-module
+[submodule "submodules/logos-evm-assets-module"]
+	path = submodules/logos-evm-assets-module
+	url = https://github.com/logos-co/logos-evm-assets-module
+[submodule "submodules/logos-evm-uniswap-module"]
+	path = submodules/logos-evm-uniswap-module
+	url = https://github.com/logos-co/logos-evm-uniswap-module
 [submodule "submodules/logos-eth-wallet-backend"]
 	path = submodules/logos-eth-wallet-backend
 	url = https://github.com/logos-co/logos-eth-wallet-backend
@@ -52,6 +61,9 @@
 [submodule "submodules/logos-eth-wallet-ui"]
 	path = submodules/logos-eth-wallet-ui
 	url = https://github.com/logos-co/logos-eth-wallet-ui
+[submodule "submodules/logos-uniswap-ui"]
+	path = submodules/logos-uniswap-ui
+	url = https://github.com/logos-co/logos-uniswap-ui
 [submodule "submodules/logos-evm-keystore-cli"]
 	path = submodules/logos-evm-keystore-cli
 	url = https://github.com/logos-co/logos-evm-keystore-cli
