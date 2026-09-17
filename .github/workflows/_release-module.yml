@@ -93,7 +93,7 @@ jobs:
     # same commit today, but Windows exists only from v1.4 — v1.1 through
     # v1.3 have no windows-x86_64 leg at all — so tracking the major tag
     # would let a rollback drop the platform silently rather than fail.
-    uses: logos-co/logos-modules-release-action/.github/workflows/release.yml@v1.5
+    uses: logos-co/logos-modules-release-action/.github/workflows/release.yml@v1
     with:
       module_path: ${{ inputs.module_path }}
       variants: ${{ inputs.variants }}
