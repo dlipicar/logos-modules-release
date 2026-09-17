@@ -96,7 +96,6 @@ jobs:
     uses: logos-co/logos-modules-release-action/.github/workflows/release.yml@v1
     with:
       module_path: ${{ inputs.module_path }}
-      variants: ${{ inputs.variants }}
 
       # Normal runs skip a version that's already fully published; "Force
       # build" (force_build: true) republishes it by disabling that skip.
