@@ -72,8 +72,9 @@ blocks every 0.1.x module that depends on it until it is replaced.
 
 | Module | Package | Depends on | What it does |
 | --- | --- | --- | --- |
-| `logos-monero-node-module` | `monero_node_module` | — | Proxyable, fail-closed monerod JSON-RPC client (per-network config). |
-| `logos-monero-wallet-core-module` | `monero_wallet_core_module` | `monero_node_module` | The wallet engine: wraps monero_c (wallet2) over its C ABI. The only module that holds a key or a password. |
+| `logos-monerod-module` | `monerod_module` | — | A Monero node running in-process: monerod as a library, with per-network config, start, stop, status and log tail. |
+| `logos-monero-node-module` | `monero_node_module` | `monerod_module` (optional) | Proxyable, fail-closed monerod JSON-RPC client (per-network config). Never runs a node itself; its local mode dials the one `monerod_module` runs. |
+| `logos-monero-wallet-core-module` | `monero_wallet_core_module` | `monero_node_module` | The wallet engine: wraps monero_c (wallet2, built from source) over its C ABI. The only module that holds a key or a password. |
 | `logos-monero-wallet-backend` | `monero_wallet_backend` | `monero_wallet_core_module`, `monero_node_module` | Coordinator: registry, sync, balances, history and the build-review-broadcast send flow. Holds no key material. |
 
 ### UI
@@ -81,6 +82,7 @@ blocks every 0.1.x module that depends on it until it is replaced.
 | Module | Package | Provides intents | What it does |
 | --- | --- | --- | --- |
 | `logos-monero-wallet-ui` | `monero_wallet_ui` | `monero.wallet.unlock`, `monero.accounts.manage` | The wallet app: balances, a reviewed send, receive with QR, activity, wallet management. |
+| `logos-monerod-ui` | `monerod_ui` | `monero.node.configure` | Runs and manages the local node: sync progress, peers, settings and the node log. |
 
 ### CLI
 
@@ -88,10 +90,17 @@ blocks every 0.1.x module that depends on it until it is replaced.
 | --- | --- | --- |
 | `logos-monero-wallet-cli` | `monero_wallet_cli` | Headless Monero wallet for `logosctl`: open, read, transfer, review, broadcast. Holds the custodian and approver roles. |
 
-Unlike the EVM set, the Monero stack is closed on its own: no module
-declares `uses`, so nothing here depends on an intent another module has
-to provide. `monero_wallet_ui` *provides* two, for consumers outside this
-catalog.
+The Monero stack is closed on its own. Its one `uses` is
+`monero_wallet_ui`'s `monero.node.configure`: the node sheet's **Manage
+local node…** hands off to `monerod_ui`, which provides it.
+`monero_wallet_ui` also *provides* two intents, for consumers outside this
+catalog. Nothing crosses between the Monero and EVM stacks.
+
+Running a node on the device is optional. `monero_node_module` names
+`monerod_module` as an optional dependency and dials it only when a
+network's node config is in local mode; the default remote mode talks to
+a configured endpoint. The wallet offers "the node on this device" only
+when `monerod_module` is installed.
 
 ## Working with the catalog
 

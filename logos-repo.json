@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "darios-logos-modules",
   "displayName": "Dario's Logos Modules",
-  "description": "The Logos wallet stacks: EVM/Ethereum (keystore, signer, RPC, token lists, fees, assets, transaction sending, Uniswap swaps) and Monero (node RPC, wallet core, backend), with their UIs and logosctl CLIs.",
+  "description": "The Logos wallet stacks: EVM/Ethereum (keystore, signer, RPC, token lists, fees, assets, transaction sending, Uniswap swaps) and Monero (a local node, node RPC, wallet core, backend), with their UIs and logosctl CLIs.",
   "homepage": "https://github.com/dlipicar/logos-modules-release",
   "indexUrl": "https://github.com/dlipicar/logos-modules-release/releases/download/index/index.json",
   "trustedSigners": []
