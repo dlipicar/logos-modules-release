@@ -43,6 +43,9 @@
 [submodule "submodules/logos-eth-wallet-backend"]
 	path = submodules/logos-eth-wallet-backend
 	url = https://github.com/logos-co/logos-eth-wallet-backend
+[submodule "submodules/logos-uniswap-backend"]
+	path = submodules/logos-uniswap-backend
+	url = https://github.com/logos-co/logos-uniswap-backend
 [submodule "submodules/logos-evm-keystore-ui"]
 	path = submodules/logos-evm-keystore-ui
 	url = https://github.com/logos-co/logos-evm-keystore-ui

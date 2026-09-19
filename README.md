@@ -22,16 +22,17 @@ tag.
 | `logos-verified-proxy-module` | `verified_proxy_module` | — | Light-client-verified JSON-RPC, wrapping status-im's nimbus libverifproxy. |
 | `logos-evm-fee-module` | `fee_module` | `eth_rpc_module` | EIP-1559 slow/normal/fast tiers from `eth_feeHistory`, with custom overrides, and whole-bundle estimates. |
 | `logos-evm-tx-sender-module` | `tx_sender_module` | `eth_rpc_module`, `fee_module`, `keystore_module` | The one transaction sender on the device: one nonce ledger, a call bundle approved as one keystore decision, ordered broadcast, write-ahead history. Holds no key material. |
-| `logos-evm-assets-module` | `evm_assets_module` | `eth_rpc_module`, `token_list_module` | Native and ERC-20 identity, balances, amount conversion, unsigned transfer building and history decoration. Cannot sign or send. |
+| `logos-evm-assets-module` | `evm_assets_module` | `eth_rpc_module` | Native and ERC-20 identity, balances, amount conversion, unsigned transfer building and history decoration, over the token rows its caller passes in. Cannot sign or send. |
 | `logos-evm-uniswap-module` | `uniswap_module` | `eth_rpc_module` | V2/V3/V4 best-rate prices (Multicall3-batched), swap quotes, and the calls that make a swap. Sends nothing. |
 | `logos-eth-wallet-backend` | `eth_wallet_backend` | `eth_rpc_module`, `fee_module`, `keystore_module`, `token_list_module`, `evm_assets_module`, `tx_sender_module` | The wallet composer: multi-chain balances and activity over the modules above, with every send leaving through `tx_sender_module`. |
+| `logos-uniswap-backend` | `uniswap_backend` | `eth_rpc_module`, `token_list_module`, `evm_assets_module`, `fee_module`, `keystore_module`, `tx_sender_module`, `uniswap_module` | The Uniswap app's backend: quotes, swaps and swap history, composed from the modules above. Holds no key material. |
 
 ### UI
 
 | Module | Package | Provides intent | What it does |
 | --- | --- | --- | --- |
 | `logos-eth-wallet-ui` | `eth_wallet_ui` | `evm.transactions.send` | The wallet itself: balances and activity across enabled networks, Send on an explicitly chosen chain. Holds no key material. |
-| `logos-uniswap-ui` | `uniswap_ui` | — | Swap any two tokens on Uniswap from the wallet's accounts. Holds no key material and sends nothing itself. |
+| `logos-uniswap-ui` | `uniswap_ui` | — | Swap any two tokens on Uniswap from the wallet's accounts: a view over `uniswap_backend`. Holds no key material and sends nothing itself. |
 | `logos-evm-keystore-ui` | `evm_keystore_ui` | `evm.accounts.manage` | Create, import, export, rename, delete accounts. |
 | `logos-evm-signer-ui` | `evm_signer_ui` | `evm.signing.approve` | The only surface that renders what is to be signed and takes the vault password. |
 | `logos-eth-rpc-ui` | `eth_rpc_ui` | `evm.rpc.configure` | Endpoint, chain and verified-proxy configuration. |
@@ -46,8 +47,8 @@ signing, accounts and token lists.
 
 `evm.transactions.send` points the other way: `eth_wallet_ui` provides it
 for apps outside this catalog that want the wallet to send on their
-behalf. `uniswap_ui` does not use it — it hands the calls that make a swap
-to `tx_sender_module` directly.
+behalf. `uniswap_ui` does not use it — `uniswap_backend` hands the calls
+that make a swap to `tx_sender_module` directly.
 
 ### CLI
 
