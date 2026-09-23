@@ -3,7 +3,7 @@
 Dario's personal collection of Logos packages — two complete wallet
 stacks, **EVM / Ethereum** and **Monero**, each covering everything from
 key custody through to the send screen, plus a Uniswap swap app on the
-EVM side.
+EVM side — and the **Chat** app with the delivery module it runs on.
 
 Each entry is a git submodule under `submodules/`, published as an `.lgx`
 package by the matching `Release <module>` workflow. `logos-repo.json` is
@@ -102,6 +102,20 @@ Running a node on the device is optional. `monero_node_module` names
 network's node config is in local mode; the default remote mode talks to
 a configured endpoint. The wallet offers "the node on this device" only
 when `monerod_module` is installed.
+
+## Chat
+
+| Module | Package | Depends on | What it does |
+| --- | --- | --- | --- |
+| `logos-delivery-module` | `delivery_module` | `liblogos_rln_module` (optional) | High-level message delivery: wraps liblogosdelivery from logos-delivery as a module. |
+| `logos-chat-module` | `chat_module` | `delivery_module` | End-to-end encrypted chat over the Logos bus, wrapping libchat. |
+| `logos-chat-ui` | `chat_ui` | `chat_module`, `delivery_module` | The Chat app: identity, conversations and messages, over `chat_module`. |
+
+`liblogos_rln_module` is an optional dependency and is not in this
+catalog. A node whose preset has RLN off runs without it; an RLN-enabled
+preset also needs `liblogos_rln_module` and `liblogos_lez_rln_module`, or
+the node's bring-up ends in `Failed`. Nothing in the chat stack declares
+an intent, and nothing crosses to the wallet stacks.
 
 ## Working with the catalog
 

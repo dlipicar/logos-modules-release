@@ -100,3 +100,12 @@
 [submodule "submodules/logos-storage-ui"]
 	path = submodules/logos-storage-ui
 	url = https://github.com/logos-co/logos-storage-ui.git
+[submodule "submodules/logos-delivery-module"]
+	path = submodules/logos-delivery-module
+	url = https://github.com/logos-co/logos-delivery-module
+[submodule "submodules/logos-chat-module"]
+	path = submodules/logos-chat-module
+	url = https://github.com/logos-co/logos-chat-module
+[submodule "submodules/logos-chat-ui"]
+	path = submodules/logos-chat-ui
+	url = https://github.com/logos-co/logos-chat-ui
