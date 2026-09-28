@@ -18,6 +18,8 @@ by fetching `logos-repo.json` from the default branch root.
 |---|---|
 | `lez-explorer-ui` | logos-blockchain |
 | `lez-indexer-module` | logos-blockchain |
+| `logos-amm-module` | logos-blockchain |
+| `logos-amm-ui-module` | logos-blockchain |
 | `logos-blockchain-module` | logos-blockchain |
 | `logos-blockchain-ui` | logos-blockchain |
 | `logos-execution-zone-module` | logos-blockchain |
@@ -31,6 +33,7 @@ by fetching `logos-repo.json` from the default branch root.
 | `logos-chat-module-mix` | logos-co (`feat/logos-testnetv02-mix`) |
 | `logos-chat-ui` | logos-co |
 | `logos-chat-ui-mix` | logos-co (`feat/logos-testnetv02-mix`) |
+| `logos-delivery-demo` | logos-co |
 | `logos-delivery-module` | logos-co |
 | `logos-libp2p-module` | logos-co |
 
@@ -81,11 +84,9 @@ by fetching `logos-repo.json` from the default branch root.
 
 | Module | Source |
 |---|---|
-| `logos-accounts-module` | logos-co |
 | `logos-accounts-ui` | logos-co |
 | `logos-json-rpc-bridge` | logos-co |
-| `logos-wallet-module` | logos-co |
-| `logos-wallet-ui` | logos-co |
+| `openmetrics-module` | logos-co |
 
 ## Runners and the Nix cache
 
