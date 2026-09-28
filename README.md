@@ -12,19 +12,39 @@ by fetching `logos-repo.json` from the default branch root.
 
 ## Module set
 
+### Logos Blockchain
+
 | Module | Source |
 |---|---|
 | `lez-explorer-ui` | logos-blockchain |
 | `lez-indexer-module` | logos-blockchain |
-| `logos-accounts-module` | logos-co |
-| `logos-accounts-ui` | logos-co |
 | `logos-blockchain-module` | logos-blockchain |
 | `logos-blockchain-ui` | logos-blockchain |
+| `logos-execution-zone-module` | logos-blockchain |
+| `logos-execution-zone-wallet-ui` | logos-blockchain |
+
+### Logos Messaging
+
+| Module | Source |
+|---|---|
 | `logos-chat-module` | logos-co |
 | `logos-chat-module-mix` | logos-co (`feat/logos-testnetv02-mix`) |
 | `logos-chat-ui` | logos-co |
 | `logos-chat-ui-mix` | logos-co (`feat/logos-testnetv02-mix`) |
 | `logos-delivery-module` | logos-co |
+| `logos-libp2p-module` | logos-co |
+
+### Logos Storage
+
+| Module | Source |
+|---|---|
+| `logos-storage-module` | logos-co |
+| `logos-storage-ui` | logos-co |
+
+### EVM Wallet
+
+| Module | Source |
+|---|---|
 | `logos-eth-rpc-ui` | logos-co |
 | `logos-eth-wallet-backend` | logos-co |
 | `logos-eth-wallet-ui` | logos-co |
@@ -39,10 +59,16 @@ by fetching `logos-repo.json` from the default branch root.
 | `logos-evm-token-list-module` | logos-co |
 | `logos-evm-tx-sender-module` | logos-co |
 | `logos-evm-uniswap-module` | logos-co |
-| `logos-execution-zone-module` | logos-blockchain |
-| `logos-execution-zone-wallet-ui` | logos-blockchain |
-| `logos-json-rpc-bridge` | logos-co |
-| `logos-libp2p-module` | logos-co |
+| `logos-token-list-ui` | logos-co |
+| `logos-uniswap-backend` | logos-co |
+| `logos-uniswap-ui` | logos-co |
+| `logos-verified-proxy-module` | logos-co |
+| `logos-verified-proxy-ui` | logos-co |
+
+### Monero Wallet
+
+| Module | Source |
+|---|---|
 | `logos-monero-node-module` | logos-co |
 | `logos-monero-wallet-backend` | logos-co |
 | `logos-monero-wallet-cli` | logos-co |
@@ -50,13 +76,14 @@ by fetching `logos-repo.json` from the default branch root.
 | `logos-monero-wallet-ui` | logos-co |
 | `logos-monerod-module` | logos-co |
 | `logos-monerod-ui` | logos-co |
-| `logos-storage-module` | logos-co |
-| `logos-storage-ui` | logos-co |
-| `logos-token-list-ui` | logos-co |
-| `logos-uniswap-backend` | logos-co |
-| `logos-uniswap-ui` | logos-co |
-| `logos-verified-proxy-module` | logos-co |
-| `logos-verified-proxy-ui` | logos-co |
+
+### Others
+
+| Module | Source |
+|---|---|
+| `logos-accounts-module` | logos-co |
+| `logos-accounts-ui` | logos-co |
+| `logos-json-rpc-bridge` | logos-co |
 | `logos-wallet-module` | logos-co |
 | `logos-wallet-ui` | logos-co |
 
