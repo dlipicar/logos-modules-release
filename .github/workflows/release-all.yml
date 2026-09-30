@@ -37,9 +37,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Every `path = submodules/<repo>` entry in .gitmodules.
+          # Every `path = submodules/<repo>` entry in .gitmodules. A
+          # submodule holding several modules lists their directories as
+          # `module = <dir>` lines; each becomes submodules/<repo>/<dir>.
           paths="$(git config --file .gitmodules --get-regexp 'submodule\..*\.path$' 2>/dev/null \
-                   | awk '{print $2}' | sort -u || true)"
+                   | while read -r key path; do
+                       dirs="$(git config --file .gitmodules --get-all "${key%.path}.module" || true)"
+                       if [ -n "${dirs}" ]; then
+                         printf '%s\n' "${dirs}" | sed "s#^#${path}/#"
+                       else
+                         echo "${path}"
+                       fi
+                     done | sort -u || true)"
           if [ -z "${paths}" ]; then
             echo 'matrix={"module_path":[]}' >> "$GITHUB_OUTPUT"
             echo 'count=0' >> "$GITHUB_OUTPUT"

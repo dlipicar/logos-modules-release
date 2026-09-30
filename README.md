@@ -34,6 +34,8 @@ by fetching `logos-repo.json` from the default branch root.
 | `logos-delivery-demo` | logos-co |
 | `logos-delivery-module` | logos-co |
 | `logos-libp2p-module` | logos-co |
+| `logos-lez-rln-module` | logos-co |
+| `logos-rln-module` | logos-co |
 
 ### Logos Storage
 

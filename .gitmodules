@@ -12,6 +12,9 @@
 ;
 ; `release-all.yml` discovers modules by reading the `path = submodules/*`
 ; entries in this file, so you never maintain a build matrix by hand.
+; A submodule that holds several modules in subdirectories lists each one
+; as a `module = <dir>` line; release-all then builds
+; submodules/<repo>/<dir> for each instead of the submodule root.
 ;
 ; After cloning a fork, materialise the submodule working trees with:
 ;
@@ -148,3 +151,8 @@
 [submodule "submodules/logos-monerod-ui"]
 	path = submodules/logos-monerod-ui
 	url = https://github.com/logos-co/logos-monerod-ui
+[submodule "submodules/logos-rln-modules"]
+	path = submodules/logos-rln-modules
+	url = https://github.com/logos-co/logos-rln-modules
+	module = logos-lez-rln-module
+	module = logos-rln-module
