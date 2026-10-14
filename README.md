@@ -107,15 +107,18 @@ when `monerod_module` is installed.
 
 | Module | Package | Depends on | What it does |
 | --- | --- | --- | --- |
-| `logos-delivery-module` | `delivery_module` | `liblogos_rln_module` (optional) | High-level message delivery: wraps liblogosdelivery from logos-delivery as a module. |
+| `logos-delivery-module` | `delivery_module` | `libp2p_module`, `liblogos_rln_module` (both optional) | High-level message delivery: wraps liblogosdelivery from logos-delivery as a module. |
 | `logos-chat-module` | `chat_module` | `delivery_module` | End-to-end encrypted chat over the Logos bus, wrapping libchat. |
 | `logos-chat-ui` | `chat_ui` | `chat_module`, `delivery_module` | The Chat app: identity, conversations and messages, over `chat_module`. |
 
-`liblogos_rln_module` is an optional dependency and is not in this
-catalog. A node whose preset has RLN off runs without it; an RLN-enabled
-preset also needs `liblogos_rln_module` and `liblogos_lez_rln_module`, or
-the node's bring-up ends in `Failed`. Nothing in the chat stack declares
-an intent, and nothing crosses to the wallet stacks.
+Neither optional dependency is in this catalog. `libp2p_module` hosts
+external service discovery: a node configured for it
+(`pluginKadDiscovery`) fails to start without it, and any other node runs
+without it. A node whose preset has RLN off runs without
+`liblogos_rln_module`; an RLN-enabled preset also needs
+`liblogos_rln_module` and `liblogos_lez_rln_module`, or the node's
+bring-up ends in `Failed`. Nothing in the chat stack declares an intent,
+and nothing crosses to the wallet stacks.
 
 ## Working with the catalog
 
