@@ -210,10 +210,12 @@ git submodule update --init --recursive   # after cloning; trees are not committ
 ./scripts/add-module.sh <git-url>         # add a module + its release workflow
 ```
 
-Every module here builds for `windows-x86_64` as well as the three
-native variants — it is in the `variants:` default in
-`.github/workflows/_release-module.yml`, which is the one place to change
-the platform set for the whole catalog. Windows is a mingw **cross**
+For now every module is released for `darwin-arm64` and `linux-amd64`
+only. Every module also exposes `linux-arm64` and `windows-x86_64`; the
+`variants:` line in `.github/workflows/_release-module.yml` is the one
+place to change the platform set for the whole catalog, and a forced
+release (`./scripts/catalog.sh release-all --force`) adds the others to
+an already-published version. Windows is a mingw **cross**
 build produced on a Linux runner; there is no Nix for Windows.
 
 No module overrides that any more. `logos-verified-proxy-ui` used to
