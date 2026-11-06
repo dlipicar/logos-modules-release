@@ -5,7 +5,7 @@ Dario's personal collection of Logos packages — four wallet stacks,
 everything from key custody (and, where it applies, a node of your own)
 through to the send screen, plus a Uniswap swap app on the EVM side — and
 what they share: the **signer manager** with its hardware signers
-(Keycard, Keycard Shell, air-gapped QR wallets) and the **Tor** that
+(Keycard, Keycard Shell) and the **Tor** that
 comes with Logos.
 
 Each entry is a git submodule under `submodules/`, published as an `.lgx`
@@ -34,11 +34,9 @@ accounts, and every signature goes through the signer manager.
 | Module | Package | Depends on | What it does |
 | --- | --- | --- | --- |
 | `logos-evm-keystore-module` | `keystore_module` | — | scrypt vaults, BIP39/BIP32 HD derivation, secp256k1 signing. No network; private keys never leave it. |
-| `logos-signer-manager-module` | `signer_manager_module` | `keystore_module`; `keycard_module`, `keycard_shell_module`, `qr_signer_module` (optional) | Takes every signature request, shows it through the signer app, and has the account's own signer sign it. Holds no keys. |
+| `logos-signer-manager-module` | `signer_manager_module` | `keystore_module`; `keycard_module`, `keycard_shell_module` (optional) | Takes every signature request, shows it through the signer app, and has the account's own signer sign it. Holds no keys. |
 | `logos-keycard-module` | `keycard_module` | — | Keycard signer: accounts offered from a bare Keycard in a smart-card reader, signed once the card's PIN opens it. Holds no secret but a 3.x card's pairing. |
 | `logos-keycard-shell-module` | `keycard_shell_module` | — | Keycard Shell signer over USB: each request is signed on the Shell's own screen. Holds no secret. |
-| `logos-qr-scanner-module` | `qr_scanner_module` | — | Shows QR codes and reads them through the camera for other modules, via the Logos QR helper it bundles. Only decoded text comes back. |
-| `logos-qr-signer-module` | `qr_signer_module` | `qr_scanner_module` | Air-gapped wallets that sign over animated QR codes (BC-UR, ERC-4527), such as the Keycard Shell, Keystone, Passport and Jade. Holds no secret. |
 
 ### UI
 
@@ -47,7 +45,6 @@ accounts, and every signature goes through the signer manager.
 | `logos-evm-signer-ui` | `evm_signer_ui` | `evm.signing.approve`, `wallets.unlock` | The only surface that renders what is to be signed, in the signer manager's own words, and where each wallet is unlocked once per session for every app. |
 | `logos-evm-keystore-ui` | `evm_keystore_ui` | `evm.accounts.manage`, `keystore.accounts.open` | Create, import, export, rename, delete accounts, and decide apps' requests to open them. |
 | `logos-keycard-ui` | `keycard_ui` | `evm.accounts.manage` | Keycard wallets and accounts, through a smart-card reader or a Keycard Shell over USB. |
-| `logos-qr-signer-ui` | `qr_signer_ui` | — | Adds an air-gapped wallet's accounts from its account code, and chooses which ones Logos apps may use. |
 
 ### CLI
 

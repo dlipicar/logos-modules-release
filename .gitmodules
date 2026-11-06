@@ -127,15 +127,6 @@
 [submodule "submodules/logos-keycard-ui"]
 	path = submodules/logos-keycard-ui
 	url = https://github.com/logos-co/logos-keycard-ui
-[submodule "submodules/logos-qr-scanner-module"]
-	path = submodules/logos-qr-scanner-module
-	url = https://github.com/logos-co/logos-qr-scanner-module
-[submodule "submodules/logos-qr-signer-module"]
-	path = submodules/logos-qr-signer-module
-	url = https://github.com/logos-co/logos-qr-signer-module
-[submodule "submodules/logos-qr-signer-ui"]
-	path = submodules/logos-qr-signer-ui
-	url = https://github.com/logos-co/logos-qr-signer-ui
 [submodule "submodules/logos-signer-manager-module"]
 	path = submodules/logos-signer-manager-module
 	url = https://github.com/logos-co/logos-signer-manager-module
